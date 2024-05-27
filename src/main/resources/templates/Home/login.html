@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransJo | Admin DashBoard</title>
+    <link rel="icon" href="/custom/image/bus.ico" type="image/x-icon">
+    <link href="/custom/Css/login.css" rel="stylesheet" />
+
+</head>
+
+<body>
+<div class="topnav">
+    <img src="/custom/image/logo.jpg" alt="Logo" class="logo">
+
+</div>
+<div class="container">
+    <div class="left-side">
+
+        <img src="/custom/image/1.png" alt="Welcome Image" class="welcome-image">
+    </div>
+    <div class="right-side">
+        <form id="loginForm" th:action="@{/login}" method="get">
+
+            <h2>Login</h2>
+            <div class="input-group">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="text" id="email" name="email"  placeholder="email" aria-label="email">
+            </div>
+            <div class="input-group">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" id="password" name="password" placeholder="Password" required aria-label="Password">
+            </div>
+            <button type="submit" class="btn" id="loginBtn">Login</button>
+            <!-- Error message div -->
+            <div th:if="${loginError}" class="error-message">
+                Invalid username or password. Please try again.
+            </div>
+            <!-- Loader -->
+            <div id="loader" class="spinner" style="display: none;"></div>
+
+        </form>
+    </div>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+    document.getElementById('loginBtn').addEventListener('click', showSpinner);
+
+    function showSpinner(event) {
+        event.preventDefault();
+        document.getElementById('loader').style.display = 'block';
+        setTimeout(() => {
+            hideSpinner();
+        }, 2000);
+    }
+    function hideSpinner() {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('loginForm').submit();
+    }
+</script>
+
+</body>
+
+</html>

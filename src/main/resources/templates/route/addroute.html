@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet"th:href="@{/custom/Css/style3.css}">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>TransJo | Add New Route</title>
+    <link rel="icon" th:href="@{/custom/image/bus.ico}" type="image/x-icon">
+
+
+    <style>
+        .button {
+            background-color: rgb(17, 124, 231);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .button:hover{
+            background-color: #ffffff55;}
+
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgb(38, 38, 70);
+            border-radius: 10px;
+
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+
+    </style>
+    <script>
+
+        var stopIndex = 0;
+
+        function addStop() {
+            const container = document.getElementById('stopPoints');
+
+            const newStopDiv = document.createElement('div');
+            newStopDiv.classList.add('user-box');
+
+            newStopDiv.innerHTML = `
+  <div aria-label="Stop ${stopIndex + 1}">
+ <div class="user-box">
+    <input type="text" id="stopName${stopIndex}" name="stopPoints[${stopIndex}].stopName" class="user-box"  required>
+    <label for="stopName${stopIndex}">Stop Name</label>
+ </div>
+ <div class="user-box">
+    <input type="text" id="latitude${stopIndex}" name="stopPoints[${stopIndex}].latitude" class="user-box"  required>
+    <label for="latitude${stopIndex}">Latitude</label>
+ </div>
+ <div class="user-box">
+    <input type="text" id="longitude${stopIndex}" name="stopPoints[${stopIndex}].longitude" class="user-box"  required>
+    <label for="longitude${stopIndex}">Longitude</label>
+  </div>
+  `;
+
+            container.appendChild(newStopDiv);
+            stopIndex++;
+        }
+
+
+        function showSuccessAlert() {
+            alert("Route added successfully!");
+        }
+    </script>
+</head>
+<body>
+<div class="topnav">
+    <img th:src="@{/custom/image/logo.jpg}" alt="Logo" class="logo">
+    <div class="user-info">
+        <span>Hello Admin</span>
+        <img th:src="@{/custom/image/usericon.jpg}" alt="User Icon" class="user-icon">
+
+    </div>
+</div>
+<div class="menu">
+    <ul>
+        <li class="profile">
+
+        </li>
+        <li>
+            <a href="/admin/home" >
+                <i class="fa-solid fa-arrow-left"></i>
+                <p>Back</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/routes" >
+                <i class="fa-solid fa-route"></i>
+                <p>Routes</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/routes/add"class="active">
+                <i class="fa-solid fa-plus"></i>
+                <p>Add Routes</p>
+            </a>
+        </li>
+        <li class="logout">
+            <a href="/login">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Log-out</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="content">
+    <div class="login-box">
+        <br><br>
+
+        <h2>Add New Route</h2><br>
+
+        <form action="#" th:action="@{/admin/routes/add}" th:object="${routes}" method="post" onsubmit="showSuccessAlert()">
+            <div class="user-box">
+                <input type="text" id="startName" class="user-box" th:field="*{startName}" required>
+                <label>Start Name</label>
+            </div>
+            <div class="user-box">
+                <input type="text" id="endName" class="user-box"  th:field="*{endName}" required>
+                <label>End Name</label>
+            </div>
+
+            <div class="user-box">
+                <input type="number" id="fare" class="user-box"  th:field="*{fare}"  step="any" required>
+                <label>Fare</label>
+            </div>
+            <div id="stopPoints">
+            </div>
+            <button type="button" class="button" onclick="addStop()">Add Stop</button><br/><br/>
+
+            <button type="submit" class="button">Save Route</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

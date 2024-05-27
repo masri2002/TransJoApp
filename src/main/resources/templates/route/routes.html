@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/custom/Css/Style2.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" th:href="@{/custom/image/bus.ico}" type="image/x-icon">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<div class="topnav">
+    <img th:src="@{/custom/image/logo.jpg}" alt="User Icon" class="logo">
+
+    <div class="user-info">
+        <span>Hello Admin</span>
+        <img th:src="@{/custom/image/usericon.jpg}" alt="User Icon" class="user-icon">
+
+    </div>
+</div>
+<div class="menu">
+    <ul>
+        <li class="profile">
+
+        </li>
+        <li>
+            <a href="/admin/home">
+                <i class="fa-solid fa-arrow-left"></i>
+                <p>Back</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/routes" class="active">
+                <i class="fa-solid fa-route"></i>
+                <p>Routes</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/routes/add">
+                <i class="fa-solid fa-plus"></i>
+                <p>Add Routes</p>
+            </a>
+        </li>
+        <li class="logout">
+            <a href="/logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Log-out</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <div class="title-info">
+        <p>Dashboard</p>
+        <i class="fas fa-chart-bar"></i>
+    </div>
+    <div class="data-info">
+        <div class="box">
+            <i class="fas fa-user"></i>
+            <div class="data">
+                <p>Users</p>
+                <span th:text="${Count.get('passenger')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-route"></i>
+            <div class="data">
+                <p>Routes</p>
+                <span th:text="${Count.get('routes')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-id-card"></i>
+            <div class="data">
+                <p>Drivers</p>
+                <span th:text="${Count.get('drivers')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-bus"></i>
+            <div class="data">
+                <p>Buses</p>
+                <span th:text="${Count.get('buses')}">100</span>
+            </div>
+        </div>
+    </div>
+    <div class="tables-container">
+        <div class="routes-table">
+            <div class="title-info">
+                <p>Routes</p>
+                <i class="fa-solid fa-route"></i>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Route ID</th>
+                    <th>Start Name</th>
+                    <th>End Name</th>
+                    <th>Fare</th>
+                    <th>Route Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="route : ${routes}">
+                    <td th:text="${route.id}"></td>
+                    <td th:text="${route.startName}"></td>
+                    <td th:text="${route.endName}"></td>
+                    <td th:text="${route.fare}"></td>
+                    <!-- Pass route ID to the JavaScript function -->
+                    <td><a href="#" th:onclick="'javascript:showRouteOnMap(\'' + ${route.id} + '\');'">View Route</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function showRouteOnMap(routeId) {
+
+        fetch(`http://localhost:8080/api/route/${routeId}`)
+            .then(response => response.json())
+            .then(data => {
+                const stopPoints = data.route.stopPoints;
+                const baseUrl = 'https://www.google.com/maps/dir/';
+                let url = baseUrl;
+                stopPoints.forEach(stop => {
+                    url += `${stop.latitude},${stop.longitude}/`;
+                });
+                window.open(url, '_blank');
+                console.log(url)
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>

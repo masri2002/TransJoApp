@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="/custom/Css/style3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>TransJo | Admin DashBoard</title>
+    <link rel="icon" href="/custom/image/bus.ico" type="image/x-icon">
+    <style>
+
+        .button {
+            background-color: rgb(17, 124, 231);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .button:hover{
+            background-color: #ffffff55;}
+
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgb(38, 38, 70);
+            border-radius: 10px;
+
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .user-boxx{
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #B7CCE7;
+            color: #093369;
+            font-weight: 700;
+            margin: 0 -6px;
+
+
+        }
+        .user-boxx:focus {
+            outline: none;
+
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <img src="/custom/image/logo.jpg" alt="Logo" class="logo">
+    <div class="user-info">
+        <span>Hello Admin</span>
+        <img src="/custom/image/usericon.jpg" alt="User Icon" class="user-icon">
+
+    </div>
+</div>
+
+<div class="menu">
+    <ul>
+        <li class="profile">
+
+
+        </li>
+        <li>
+            <a href="/admin/home" >
+                <i class="fa-solid fa-arrow-left"></i>
+                <p>Back</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/buses" >
+                <i class="fa-solid fa-bus"></i>
+                <p>Buses</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/buses/addbus" class="active">
+                <i class="fa-solid fa-plus"></i>
+                <p>Add Buses</p>
+            </a>
+        </li>
+        <li class="logout">
+            <a href="/logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Log-out</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <div class="login-box">
+        <br><br>
+        <h2>Add New Bus</h2><br>
+        <form th:action="@{/admin/buses/add}" th:object="${bus}" method="post">
+            <div class="user-box">
+
+                <input type="text" class="user-box" th:field="*{ownerName}" required>
+                <label for="driver">Bus Owner Name</label>
+            </div>
+            <div class="user-box">
+
+                <input type="number" class="user-box"  th:field="*{capacity}" required>
+                <label for="route">Capacity</label>
+            </div>
+            <div class="user-boxx">
+                <select class="user-boxx" id="driver" th:field="*{driver.id}" style="  border-bottom: 1px solid #093369;">
+                    <label for="driver">Select Driver</label>
+                    <option value="">Select Driver</option>
+                    <option th:each="driver : ${drivers}" th:value="${driver.id}" th:text="${driver.getFullName()}"></option>
+                </select>
+            </div>
+            <div class="user-boxx">
+                <select class="user-boxx" id="route" th:field="*{route.id}" style="  border-bottom: 1px solid #093369;">
+                    <label for="route">Select Route</label>
+                    <option value="">Select Route</option>
+                    <option th:each="route : ${routes}" th:value="${route.id}" th:text="${route.getStartName() + ' to ' + route.getEndName()}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="button">Add Bus</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/custom/Css/style3.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>TransJo | Admin DashBoard</title>
+    <link rel="icon" th:href="@{/custom/image/bus.ico}" type="image/x-icon">
+
+</head>
+<body>
+<div class="topnav">
+    <img th:src="@{/custom/image/logo.jpg}" alt="Logo" class="logo">
+    <div class="user-info">
+        <span>Hello Admin</span>
+        <img th:src="@{/custom/image/usericon.jpg}" alt="User Icon" class="user-icon">
+
+    </div>
+</div>
+
+<div class="menu">
+    <ul>
+        <li class="profile">
+
+        </li>
+
+        <li>
+            <a href="/admin/home">
+                <i class="fa-solid fa-arrow-left"></i>
+                <p>Back</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/drivers/add">
+                <i class="fa-solid fa-id-card"></i>
+                <p>Drivers</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/drivers/modifydriver"class="active">
+                <i class="fa-solid fa-file-pen"></i>
+                <p>Modify Driver</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/drivers/adddriver"class="">
+                <i class="fa-solid fa-plus"></i>
+                <p>Add Driver</p>
+            </a>
+        </li>
+
+        <li class="logout">
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+
+    <div class="container">
+        <br><br>
+
+
+        <div class="login-box">
+            <h1>Modify Driver Password</h1><br><br>
+            <form onsubmit="editPassword(event)">
+                <div class="user-box">
+                    <input type="text" id="username" name="username" required>
+                    <label for="username">Username</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" id="new_password" name="new_password" required>
+                    <label for="new_password">New Password</label>
+
+                </div>
+
+
+                <button type="submit" class="button">Update</button>
+        </div>
+        </form>
+        <p id="message"></p>
+
+        <script>
+            function editPassword(event) {
+                event.preventDefault();
+
+
+                if (!validatePassword(document.getElementById('new_password').value)) {
+                    alert("Password must be strong! Please include at least 8 characters with a mix of uppercase, lowercase, numbers, and special characters.");
+                    return;
+                }
+
+
+                const username = document.getElementById('username').value;
+                const newPassword = document.getElementById('new_password').value;
+
+
+            }
+
+            function validatePassword(password) {
+
+                const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                return strongPasswordRegex.test(password);
+            }
+        </script>
+</body>
+</html>

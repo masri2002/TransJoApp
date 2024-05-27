@@ -1,0 +1,26 @@
+
+FROM openjdk:21-jdk
+
+
+COPY target/transJo.jar .
+
+
+EXPOSE 8080
+
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://monorail.proxy.rlwy.net:22877/railway
+ENV SPRING_DATASOURCE_USERNAME=root
+ENV SPRING_DATASOURCE_PASSWORD=AaNbUBcPtNrPzWWJxUuRzTPPJJOIGKjm
+ENV SPRING_JPA_HIBERNATE_DDL_AUTO=none
+ENV SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+ENV SPRING_MAIL_HOST=smtp.gmail.com
+ENV SPRING_MAIL_PORT=587
+ENV SPRING_MAIL_USERNAME=ahmadmcs2002@gmail.com
+ENV SPRING_MAIL_PASSWORD=xdbmcwblcebvmzup
+ENV SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+ENV SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+ENV application.security.jwt.secret-key=4bb6d1dfbafb64a681139d1586b6f1160d18159afd57c8c79136d7490630407c
+ENV application.security.jwt.access-token-expiration=86400000
+ENV application.security.jwt.refresh-token-expiration=604800000
+
+
+ENTRYPOINT ["java", "-jar", "transJo.jar"]

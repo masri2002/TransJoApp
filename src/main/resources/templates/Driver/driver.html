@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <link th:href="@{/custom/Css/Style.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>TransJo | Admin DashBoard</title>
+    <link rel="icon" th:href="@{/custom/image/bus.ico}" type="image/x-icon">
+    <style>
+
+        .button {
+            background-color: rgb(17, 124, 231);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .button:hover{
+            background-color: #ffffff55;}
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <img th:src="@{/custom/image/logo.jpg}" alt="Logo" class="logo">
+    <div class="user-info">
+        <span>Hello Admin</span>
+        <img th:src="@{/custom/image/usericon.jpg}" alt="User Icon" class="user-icon">
+
+    </div>
+</div>
+<div class="menu">
+    <ul>
+        <li class="profile">
+
+
+        </li>
+
+        <li>
+            <a href="/admin/home">
+                <i class="fa-solid fa-arrow-left"></i>
+                <p>Back</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/drivers"class="active">
+                <i class="fa-solid fa-id-card"></i>
+                <p>Drivers</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/drivers/modifydriver"class="">
+                <i class="fa-solid fa-file-pen"></i>
+                <p>Modify Driver</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/drivers/add"class="">
+                <i class="fa-solid fa-plus"></i>
+                <p>Add Driver</p>
+            </a>
+        </li>
+
+        <li class="logout">
+            <a href="">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Log-out</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <div class="title-info">
+        <p>Dashboard</p>
+        <i class="fas fa-chart-bar"></i>
+    </div>
+    <div class="data-info">
+        <div class="box">
+            <i class="fas fa-user"></i>
+            <div class="data">
+                <p>Users</p>
+                <span th:text="${Count.get('passenger')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-route"></i>
+            <div class="data">
+                <p>Routes</p>
+                <span th:text="${Count.get('routes')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-id-card"></i>
+            <div class="data">
+                <p>Drivers</p>
+                <span th:text="${Count.get('drivers')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-bus"></i>
+            <div class="data">
+                <p>Buses</p>
+                <span th:text="${Count.get('buses')}">100</span>
+            </div>
+        </div>
+    </div>
+    <div class="title-info">
+        <p>Drivers</p>
+        <i class="fa-solid fa-user"></i>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="driver : ${drivers}">
+            <td th:text="${driver.id}"></td>
+            <td th:text="${driver.fullName}"></td>
+            <td th:text="${driver.email}"></td>
+            <td th:text="${driver.role}"></td>
+            <td>
+                <button  class="button"><a th:href="@{'/admin/modify-driver/' + ${driver.id}}">Modify</a></button>
+                <button  class="button"><a th:href="@{'/admin/delete-driver/' + ${driver.id}}">Delete</a></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

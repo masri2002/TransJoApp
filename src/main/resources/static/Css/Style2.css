@@ -1,0 +1,211 @@
+*{
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-family: sans-serif;
+}
+body
+{
+    background-color: #b7cce7;
+    display: flex;
+}
+.content{
+    width: 100%;
+    margin: 10px;
+}
+.title-info{
+    padding: 10px;
+    background-color: #0c448c;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+    border-radius: 8px;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    text-transform: capitalize;
+}
+.menu{
+    background-color: #1055B0;
+    width: 55px;
+    overflow: hidden;
+    height: 100vh;
+    padding: 20px;
+    transition: 0.5s;
+}
+.menu:hover{
+    background-color: #1055B0;
+    width: 265px;
+    overflow: hidden;
+    height: 100vh;
+    padding: 20px;
+
+}
+ul{
+    list-style: none;
+    position: relative;
+    height: 95%;
+    margin-top: 60px;
+}
+ul li a{
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    margin: 10px 0px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    transition: 0.5s;
+}
+ul li a:hover ,.active  ,.data-info .box:hover  ,td:hover{
+    background-color: #ffffff55;
+}
+.logout{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.logout a {
+    background-color: #0c448c;
+}
+ul li a i {
+    font-size: 30px;
+}
+.data-info{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.data-info .box{
+    background-color: #6f99cf;
+    height: 150px;
+    flex-basis: 140px;
+    flex-grow: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.data-info .box i{
+    font-size: 40px;
+}
+.data-info .box .data span{
+    font-size: 30px;
+}
+table {
+    width: 100%;
+    text-align: center;
+    border-spacing: 8px;
+}
+td ,th {
+    background-color: #093369;
+    height: 40px;
+
+}
+th{
+    background-color: rgb(17, 124, 231);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff; /* White text color for better visibility */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #333; /* Subtle border for inputs */
+    background-color: #292929; /* Dark background for input fields */
+    color: white; /* Text color */
+}
+
+.button {
+    display: block; /* Change to block to use full width */
+    width: 100%; /* Full width button */
+    background-color: rgb(17, 124, 231);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: rgb(14, 99, 185);
+}
+
+.alert {
+    color: white; /* White text color */
+    padding: 10px; /* Padding for alert */
+    margin-bottom: 15px; /* Bottom margin */
+    border-radius: 5px; /* Rounded borders */
+    display: none; /* Hidden by default */
+}
+
+.alert-danger {
+    background-color: #ff4d4d; /* Red background for errors */
+}
+
+.alert-success {
+    background-color: #4CAF50; /* Green background for success */
+}
+
+.show-alert {
+    display: block; /* Show alert */
+}
+.topnav {
+    background-color: #093369;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.logo {
+    float: left;
+    padding: 15px;
+    width: 10%;
+    height: auto;
+}
+.content {
+    margin-top: 60px;
+}
+.user-info {
+    padding: 14px 16px;
+    color: #f2f2f2;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+}
+
+
+.user-icon {
+    margin-left: 5px;
+    width: 32px;
+    height: auto;
+}

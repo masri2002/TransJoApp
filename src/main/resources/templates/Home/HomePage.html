@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/custom/Css/Style.css}" rel="stylesheet" />
+    <link rel="icon" th:href="@{/custom/image/bus.ico}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Admin Dashboard</title>
+    <style>
+
+        table th:nth-child(4), table td:nth-child(4) {
+            width: 40%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        input[type="text"], input[type="date"] {
+            padding: 10px;
+            width: 30%;
+            box-sizing: border-box;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            color: black;
+            background-color: #b7cce7;
+            margin-left: -375px;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .filter-container > div {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <img th:src="@{/custom/image/logo.jpg}" alt="Logo" class="logo">
+    <div class="user-info">
+        <span>Hello Admin</span>
+        <img th:src="@{/custom/image/usericon.jpg}" alt="User Icon" class="user-icon">
+
+    </div>
+</div>
+<div class="menu">
+
+    <ul>
+
+        <li>
+            <a href="/admin/home" class="active">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/users">
+                <i class="fa-solid fa-user"></i>
+                <p>Users</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/routes">
+                <i class="fa-solid fa-route"></i>
+                <p>Routes</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/drivers">
+                <i class="fa-solid fa-id-card"></i>
+                <p>Drivers</p>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/buses">
+                <i class="fa-solid fa-bus"></i>
+                <p>Buses</p>
+            </a>
+        </li>
+
+        <li class="logout">
+            <a href="/logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Log-out</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <div class="title-info">
+        <p>Dashboard</p>
+        <i class="fas fa-chart-bar"></i>
+    </div>
+    <div class="data-info">
+        <div class="box">
+            <i class="fas fa-user"></i>
+            <div class="data">
+                <p>Users</p>
+                <span th:text="${Count.get('passenger')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-route"></i>
+            <div class="data">
+                <p>Routes</p>
+                <span th:text="${Count.get('routes')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-id-card"></i>
+            <div class="data">
+                <p>Drivers</p>
+                <span th:text="${Count.get('drivers')}">100</span>
+            </div>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-bus"></i>
+            <div class="data">
+                <p>Buses</p>
+                <span th:text="${Count.get('buses')}">100</span>
+            </div>
+        </div>
+    </div>
+    <div class="title-info">
+        <p>User Reports</p>
+        <i class="fa-solid fa-comment"></i>
+    </div>
+    <div class="filter-container">
+        <div>
+            <input type="date" id="dateInput" onchange="filterUserReports()" placeholder="Search by Date...">
+        </div>
+    </div>
+    <table id="userReportsTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date/Time</th>
+            <th>Message</th>
+            <th>User Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="userReport : ${userReports}">
+            <td th:text="${userReport.id}"></td>
+            <td th:text="${userReport.user.getFullName()}">Jane Doe</td>
+            <td th:text="${#temporals.format(userReport.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${userReport.getMessage()}"></td>
+            <td th:text="${userReport.getUser().getEmail()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function filterUserReports() {
+        var input, filter, table, tr, td, i, txtValue, dateInput, dateFilter, dateTxtValue;
+        dateInput = document.getElementById("dateInput");
+        dateFilter = dateInput.value;
+        table = document.getElementById("userReportsTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            td = tr[i].getElementsByTagName("td");
+            if (td) {
+                dateTxtValue = td[2].textContent || td[2].innerText;
+                if (!dateFilter || dateTxtValue.startsWith(dateFilter)) {
+                    tr[i].style.display = "";
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

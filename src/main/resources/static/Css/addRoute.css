@@ -1,0 +1,70 @@
+/* Reset */
+* {
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-family: sans-serif;
+}
+
+/* Body */
+body {
+    background-color: black;
+    display: flex;
+}
+
+/* Menu */
+.menu {
+    background-color: rgb(38, 38, 70);
+    width: 55px;
+    overflow: hidden;
+    height: 100vh;
+    padding: 20px;
+    transition: 0.5s;
+}
+
+.menu:hover {
+    background-color: rgb(38, 38, 70);
+    width: 265px;
+    overflow: hidden;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Menu Items */
+ul {
+    list-style: none;
+    position: relative;
+    height: 95%;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    margin: 10px 0px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    transition: 0.5s;
+}
+
+ul li a:hover, .active, .data-info .box:hover, td:hover {
+    background-color: #ffffff55;
+}
+
+/* Logout Button */
+.logout {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.logout a {
+    background-color: #a00;
+}
+
+/* Icons */
+ul li a i {
+    font-size: 30px;
+}
